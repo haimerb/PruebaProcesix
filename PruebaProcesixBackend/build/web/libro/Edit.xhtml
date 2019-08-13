@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditLibroTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditLibroLabel_libroId}" for="addressId" />
+                    <h:inputText id="addressId" value="#{libroController.selected.id}" title="#{bundle.EditLibroTitle_libroId}" required="true" requiredMessage="#{bundle.EditLibroRequiredMessage_libroId}"/>
+                    
+                    <h:outputLabel value="#{bundle.EditLibroLabel_nombreLibro}" for="nombreLibro" />
+                    <h:inputText id="nombreLibro" value="#{libroController.selected.nombreLibro}" title="#{bundle.EditLibroTitle_nombreLibro}" required="true" requiredMessage="#{bundle.EditLibroRequiredMessage_nombreLibro}"/>
+                    
+                    <h:outputLabel value="#{bundle.EditLibroLabel_autor}" for="autor" />
+                    <h:inputText id="autor" value="#{libroController.selected.autor}" title="#{bundle.EditLibroTitle_autor}" />
+                    
+                    <h:outputLabel value="#{bundle.EditLibroLabel_categoria}" for="categoria" />
+                    <h:selectOneMenu id="categoria" value="#{libroController.selected.categoriaId}" title="#{bundle.EditLibroTitle_categoria}" >
+                        <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    
+                    <h:outputLabel value="#{bundle.EditLibroLabel_estante}" for="postalCode" />
+                    <h:inputText id="postalCode" value="#{libroController.selected.estante}" title="#{bundle.EditLibroTitle_estante}" required="true" requiredMessage="#{bundle.EditLibroRequiredMessage_estante}"/>
+                    
+                </h:panelGrid>
+                <h:commandLink action="#{libroController.update}" value="#{bundle.EditLibroSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditLibroViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{libroController.prepareList}" value="#{bundle.EditLibroShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditLibroIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
