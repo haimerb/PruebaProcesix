@@ -1,0 +1,105 @@
+<!--<p>
+  login works!
+</p>-->
+<div class="signin-content-reg">
+  <mat-card>
+    <mat-card-content>
+        <img mat-card-lg-image src="assets/img/logo.png">
+        <img mat-card-lg-image src="assets/img/logo24-54.png">
+
+      <form [formGroup]="regForm" (ngSubmit)="onSubmitReg()">
+        <mat-divider></mat-divider>
+        <h1>Registro de Usuario</h1>
+        <mat-divider></mat-divider>
+
+        <mat-form-field>
+          <mat-select  placeholder="Tipo Usuario" formControlName="tipoUsuario" >
+            <mat-option value="0">Seleccione</mat-option>
+            <!--<mat-option value="1" (click)="this.setTipoUsusario('Operador')">Operador</mat-option>
+            <mat-option value="2" (click)="this.setTipoUsusario('Secreataria Turismo')">Secreataria Turismo</mat-option>
+            <mat-option value="3" (click)="this.setTipoUsusario('Establecimiento')">Establecimiento</mat-option>-->
+            <!--<mat-option *ngFor='let option of options' [value]='option' >{{option.name}}</mat-option>-->
+            <mat-option [value]="tipousuario" *ngFor="let tipousuario of listTiposUsuario" >  
+              {{tipousuario.nomtipousuario}}
+            </mat-option>
+            
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Nombres" formControlName="nombres" required>
+          <mat-error *ngIf="isFieldInvalid('nombres')">
+            Por favor ingrese sus nombre.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Apellidos" formControlName="apellidos" required>
+          <mat-error *ngIf="isFieldInvalid('apellidos')">
+            Por favor ingrese su nombre de usuario.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input">
+          <input matInput type="text" placeholder="Nombre Establecimiento" formControlName="nombreEstablecimiento" required>
+          <mat-error *ngIf="isFieldInvalid('nombreEstablecimiento')">
+            Por favor ingrese el nombre de su Establecimiento.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input" >
+          <input matInput type="number" placeholder="Telefono" formControlName="telefono" required>
+          <mat-error *ngIf="isFieldInvalid('telefono')">
+            Por favor ingrese su número de telefono.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input" >
+          <input type="number" matInput placeholder="Celular" formControlName="movil" required>
+          <mat-error *ngIf="isFieldInvalid('movil')">
+            Por favor ingrese su número de telefono Celular.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input" >
+          <input type="email" matInput placeholder="Correo" formControlName="email" required>
+          <mat-error *ngIf="isFieldInvalid('email')">
+            Por favor ingrese su dirección de correo.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input" >
+          <input type="number" matInput placeholder="Nit" formControlName="nit" required>
+          <mat-error *ngIf="isFieldInvalid('nit')">
+            Por favor ingrese su número de NIT.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Tipo Establecimiento" formControlName="tipoEstablecimiento">
+            <mat-option value="option">Seleccione</mat-option>
+            <mat-option value="option">Bar</mat-option>
+            <mat-option value="option">Restaurante</mat-option>
+            <mat-option value="option">Discoteca</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input" >
+          <input matInput type="password" placeholder="Contraseña" formControlName="password" required>
+          <mat-error *ngIf="isFieldInvalid('password')">
+            Ingrese la contraseña por favor.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input" >
+          <input matInput type="password" placeholder="Contraseña" formControlName="password" required>
+          <mat-error *ngIf="isFieldInvalid('password')">
+            Ingrese la contraseña por favor.
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button  type="submit" color="primary">Registrar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

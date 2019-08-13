@@ -1,0 +1,171 @@
+<mat-card class="example-card">
+
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title><h1>Productos</h1></mat-card-title>
+      </mat-card-header>
+  
+      <mat-card-content *ngIf="this.activeFormCrear==false&&this.activeFormEditar==false">
+  
+  <div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+  </mat-form-field>
+  </div>
+  
+  <div class="mat-elevation-z8" >
+  <mat-table  [dataSource]="dataSource" matSort>
+  
+  
+    <ng-container matColumnDef="codigoProducto">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Codigo Producto</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.codigoProducto}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="nombreProducto">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Producto </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nombreProducto}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="codigoBodega">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Bodega</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.codigoBodega.nombreBodega}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="precioProducto">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Precio</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.precioProducto}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unidadesDisponibles">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Unidades Disponibles</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.unidadesDisponibles}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tipoProducto">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.tipoProducto}} </mat-cell>
+  </ng-container>
+  
+    <ng-container matColumnDef="star" >
+      <mat-header-cell *matHeaderCellDef>Opciones</mat-header-cell >
+      <mat-cell *matCellDef="let element">
+          <button mat-button mat-icon-button (click)="prepararEditar(true,element)" matTooltip="Presiones para ir a editar Bodega">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button (click)="prepararEliminar(element)" mat-button mat-icon-button matTooltip="Presiones para eliminar Bodega">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+  
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+  
+  
+  </mat-card-content>
+  
+  
+  <mat-card-content *ngIf="this.activeFormCrear==true">
+    <form [formGroup]="regForm" (ngSubmit)="onSubmitCrearBodega()">
+      <mat-card-title><h2>Crear</h2></mat-card-title>
+      <!--<mat-form-field>
+        <mat-select  placeholder="Tipo Usuario" formControlName="tipoUsuario" >
+          <mat-option value="0">Seleccione</mat-option>
+          <mat-option [value]="tipousuario" *ngFor="let tipousuario of listTiposUsuario" >  
+              {{tipousuario.nomtipousuario}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>-->
+  
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Nombre Bodega" formControlName="nombreBodega" required>
+        <mat-error *ngIf="isFieldInvalid('nombreBodega')">
+          Por favor ingrese el nombrede su Bodega.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Localización" formControlName="localizacionBodega" required>
+        <mat-error *ngIf="isFieldInvalid('localizacionBodega')">
+          Por favor ingrese la localizacónde su Bodega.
+        </mat-error>
+      </mat-form-field>
+  
+        <mat-card-actions>
+            <button mat-button  (click)="this.prepararCrear(false)" color="primary">
+                <mat-icon>reply</mat-icon>Ir a Productos</button>
+  
+            
+      
+            <button mat-button  type="submit" color="primary">
+                <mat-icon>save</mat-icon>Guardar</button>
+        </mat-card-actions>
+  
+        
+      
+  
+    </form>
+  </mat-card-content>
+  
+  
+  <!-- Formulario Editar Bodega-->
+  
+  <mat-card-content *ngIf="this.activeFormEditar==true">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmitEditarBodega()">
+        <mat-card-title><h2>Editar</h2></mat-card-title>
+        
+  
+        <mat-form-field class="full-width-input">
+            <input matInput disabled placeholder="Codigo Bodega" formControlName="codigoBodegaEdit" required>
+            <mat-error *ngIf="isFieldInvalidEdit('codigoBodegaEdit')">
+              Por favor ingrese el codigo de su Bodega.
+            </mat-error>
+          </mat-form-field>
+    
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Nombre Bodega" formControlName="nombreBodegaEdit" required>
+          <mat-error *ngIf="isFieldInvalidEdit('nombreBodegaEdit')">
+            Por favor ingrese el nombrede su Bodega.
+          </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Localización" formControlName="localizacionBodegaEdit" required>
+          <mat-error *ngIf="isFieldInvalidEdit('localizacionBodegaEdit')">
+            Por favor ingrese la localizacónde su Bodega.
+          </mat-error>
+        </mat-form-field>
+    
+          <mat-card-actions>
+              <button mat-button  (click)="this.prepararEditar(false)" color="primary">
+                  <mat-icon>reply</mat-icon>Ir a Productos</button>
+    
+              
+        
+              <button mat-button  type="submit" color="primary">
+                  <mat-icon>save</mat-icon>Guardar</button>
+          </mat-card-actions>
+    
+          
+        
+    
+      </form>
+    </mat-card-content>
+  
+  <!-- -->
+  
+  
+  <mat-card-actions *ngIf="this.activeFormCrear==false">
+   <button mat-button color="primary" (click)="this.prepararCrear(true)">
+        <mat-icon>add</mat-icon>
+        Crear nuevo Producto
+    </button>
+  
+  </mat-card-actions>
+  </mat-card>

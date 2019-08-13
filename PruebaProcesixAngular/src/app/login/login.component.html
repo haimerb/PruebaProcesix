@@ -1,0 +1,32 @@
+<div *ngIf="this.restservice.isloguet()!=true&&this.flagShowLogin==true" class="signin-content">
+  <mat-card>
+    <mat-card-content>
+        <img mat-card-lg-image src="assets/img/logo.png">
+        <img mat-card-lg-image src="assets/img/logocali24h.png">
+       <!-- <img mat-card-lg-image src="assets/img/logo24-54.png">        -->
+      <form [formGroup]="angForm" (ngSubmit)="onSubmit()">
+        <!--<mat-divider></mat-divider>-->
+        <h1>Inicio de Sesión</h1>
+        <mat-divider></mat-divider>
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Usuario o Nit" formControlName="userName" required>
+          <mat-error *ngIf="isFieldInvalid('userName')">
+            Por favor ingrese su nombre de usuario.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input matInput type="password" placeholder="Contraseña" formControlName="password" required>
+          <mat-error *ngIf="isFieldInvalid('password')">
+            Ingrese la contraseña por favor.
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button  type="submit" color="primary">Ingresar</button>
+        
+      </form>
+      No eres miembro?<button mat-button (click)="this.showLogin(false)">registrate!</button>
+    </mat-card-content>
+  </mat-card>
+</div>
+<my-nav *ngIf="this.restservice.isloguet()==true||this.validaEnable()==true"></my-nav>
+<!--<app-principal *ngIf="this.restservice.isloguet()==true||this.validaEnable()==true"></app-principal>-->
+<app-registro  *ngIf="this.flagShowLogin==false"></app-registro>

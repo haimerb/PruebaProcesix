@@ -1,0 +1,43 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="isHandset ? 'dialog' : 'navigation'"
+    [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
+    [opened]="!(isHandset | async)!.matches">
+    <mat-toolbar color="primary">Menú</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="/principal">Inicio</a>
+      <!--<a mat-list-item href="/personas">Personas</a>-->
+      
+      <a mat-list-item href="/bodegas">Bodega</a>
+      <a mat-list-item href="/productos">Productos</a>
+
+      <!--<a mat-list-item href="/escritorio-nivel-up">Panel</a>  
+      <a mat-list-item href="/establecimientos">Establecimientos</a> 
+      <a mat-list-item href="/registro-establecimiento">Registro Establecimientos</a>  
+      <a mat-list-item href="/evaluacion">Evaluación</a> 
+      <a mat-list-item href="/resultados">Resultados</a> 
+      <a mat-list-item href="/configuracion">Configuración</a>-->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="(isHandset | async)!.matches">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Prueba Procesix</span>
+      <!--<mat-icon matBadge="22" matBadgeColor="accent">
+        home
+      </mat-icon>-->
+      <button id="logout" mat-button (click)="this.onLogout()">Salir</button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

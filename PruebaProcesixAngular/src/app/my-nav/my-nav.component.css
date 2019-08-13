@@ -1,0 +1,19 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+  box-shadow: 3px 0 6px rgba(0,0,0,.24);
+}
+
+#logout{
+  left: 50%;
+  margin-left: 30%;
+  overflow: visible;
+}
+
+.mat-toolbar.mat-primary {
+  /*background: #2ec447;*/
+  color: #fff;
+}
