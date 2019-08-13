@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateLibroTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateLibroLabel_libroId}" for="libroId" />
+                    <h:inputText id="libroId" value="#{libroController.selected.id}" title="#{bundle.CreateLibroTitle_libroId}" required="true" requiredMessage="#{bundle.CreateLibroRequiredMessage_libroId}"/>
+                    
+                    <h:outputLabel value="#{bundle.CreateLibroLabel_nombreLibro}" for="line1" />
+                    <h:inputText id="line1" value="#{libroController.selected.nombreLibro}" title="#{bundle.CreateLibroTitle_nombreLibro}" required="true" requiredMessage="#{bundle.CreateLibroRequiredMessage_nombreLibro}"/>
+                    
+                    <h:outputLabel value="#{bundle.CreateLibroLabel_autor}" for="line2" />
+                    <h:inputText id="line2" value="#{libroController.selected.autor}" title="#{bundle.CreateLibroTitle_auotr}" />
+                    
+                    <h:outputLabel value="#{bundle.CreateLibroLabel_categoria}" for="categoria" />
+                    <h:selectOneMenu id="categoria" value="#{libroController.selected.categoriaId}" title="#{bundle.CreateLibroTitle_categoria}" >
+                        <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    
+                    <h:outputLabel value="#{bundle.CreateLibroLabel_estante}" for="estante" />
+                    <h:inputText id="estante" value="#{libroController.selected.estante}" title="#{bundle.CreateLibroTitle_estante}" required="true" requiredMessage="#{bundle.CreateLibroRequiredMessage_estante}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{libroController.create}" value="#{bundle.CreateLibroSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{libroController.prepareList}" value="#{bundle.CreateLibroShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateLibroIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
