@@ -17,15 +17,19 @@
 *Para correr el proyecto es necesario seguir las siguientes instrucciones:*
 
 
-1. Descargar el repositorio.
-  - crear una carpeta para ubicar el repositorio.
-  - Git clone https://github.com/haimerb/PruebaProcesix.git
+1. Descargar el repositorio
+   - crear una carpeta para ubicar el repositorio.
+   - Git clone https://github.com/haimerb/PruebaProcesix.git
 
 2. Importar la base de datos del proyecto
-   - denro del repositorio esta el backup de base de datos listo para           importar se llama PruebaProcesixAngular.sql. Importarlo en el motor        Mysql.
+   - Dentro del repositorio esta el backup de base de datos listo para          importar se llama PruebaProcesixAngular.sql. Importarlo en el motor        Mysql.
 
 3. Instalar dependencias angular Js
-  - Ira la carpeta del proyecto la cual es PruebaProcesixAngular
+   - Ir a la carpeta del proyecto la cual es PruebaProcesixAngular
     cd PruebaProcesixAngular 
-  - correr el comando "npm install"
+   - correr el comando "npm install"
+
+4. Configurar en Netbeans o Ide con el servidor
+   - Importar el proyecto a netbeans
+   - Agregar el servidor payara a netbeans 
  
